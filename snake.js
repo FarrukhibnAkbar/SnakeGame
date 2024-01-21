@@ -33,9 +33,18 @@ window.onload = function() {
     board.width = cols * blockSize;
     context = board.getContext("2d"); //used for drawing on the board
     resultValueElement = document.getElementById("resultValue");
+    var UpButton = document.getElementById("up")
+    var DownButton = document.getElementById("down")
+    var LeftButton = document.getElementById("left")
+    var RightButton = document.getElementById("right")
 
     placeFood();
     document.addEventListener("keyup", changeDirection);
+    UpButton.addEventListener("click", changeUp);
+    DownButton.addEventListener("click", changeDown);
+    LeftButton.addEventListener("click", changeLeft);
+    RightButton.addEventListener("click", changeRight);
+
 
     setInterval(update, 200); //200 millisecond
 }
@@ -87,7 +96,30 @@ function update() {
     }
 
 }
-
+function changeUp(e) {
+    if (velocityY != 1) {
+        velocityX = 0;
+        velocityY = -1;
+    }
+}
+function changeDown(e) {
+    if (velocityY != -1) {
+        velocityX = 0;
+        velocityY = 1;
+    }
+}
+function changeLeft(e) {
+    if (velocityX != 1) {
+        velocityX = -1;
+        velocityY = 0;
+    }
+}
+function changeRight(e) {
+    if (velocityX != -1) {
+        velocityX = 1;
+        velocityY = 0;
+    }
+}
 
 function changeDirection(e) {
     if (e.code == "ArrowUp" && velocityY != 1) {
